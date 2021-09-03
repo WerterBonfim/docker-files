@@ -1,0 +1,26 @@
+FROM ubuntu
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends --fix-missing \
+    libgl-dev \
+    qt5dxcb-plugin \    
+    libcurl3-gnutls \        
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/
+
+ADD https://github.com/Studio3T/robomongo/releases/download/v1.4.3/robo3t-1.4.3-linux-x86_64-48f7dfd.tar.gz /opt/robo3t.tar.gz
+
+RUN cd /opt/ \
+    && mkdir robo3t \
+    && tar -C /opt/robo3t --strip-components 1 -xzf robo3t.tar.gz && rm robo3t.tar.gz \
+    && ls /opt/robo3t
+
+
+VOLUME [ "/root/.3T" ]
+VOLUME [ "/root/.config/3T" ]
+
+CMD [ "/opt/robo3t/bin/robo3t" ]
+
+
+# xhost +
+# docker run --rm --name robo3t -it --net=host --env="DISPLAY"  robo3t-imagem
