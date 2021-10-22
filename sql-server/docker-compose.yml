@@ -4,6 +4,7 @@ services:
   sqlserver:
     container_name: docker.banco.sqlserver
     image: mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+    user: root
     # build:
     #     context: .
     #     dockerfile: db/Dockerfile
@@ -16,9 +17,15 @@ services:
       SA_PASSWORD: '!123Senha'
       MSSQL_PID: 'Express'
     volumes:
-      - D:/docker-share/sql-server/data:/var/opt/mssql/data
-      - D:/docker-share/sql-server/log:/var/opt/mssql/log
-      - D:/docker-share/sql-server/secrets:/var/opt/mssql/secrets
+      # Linux
+      - /run/media/werter/Backups/docker-share/sql-server/data:/var/opt/mssql/data
+      - /run/media/werter/Backups/docker-share/sql-server/log:/var/opt/mssql/log
+      - /run/media/werter/Backups/docker-share/sql-server/secrets:/var/opt/mssql/secrets
+
+      # Windows
+      # - D:/docker-share/sql-server/data:/var/opt/mssql/data
+      # - D:/docker-share/sql-server/log:/var/opt/mssql/log
+      # - D:/docker-share/sql-server/secrets:/var/opt/mssql/secrets
 
 
 
