@@ -1,0 +1,8 @@
+sql server
+docker run --rm --name sql -d -e ACCEPT_EULA='y' -e SA_PASSWORD='!123Senha' -e MSSQL_PID='Express' -p 1433:1433 mcr.microsoft.com/mssql/server:2019-GA-ubuntu-16.04
+
+rabbitmq
+docker run --rm --name rabbit -d --hostname rabbit-host -p 15672:15672 -p 5672:5672 rabbitmq:management
+
+mongodb
+docker run --rm --name mongodb -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME='mongo' -e MONGO_INITDB_ROOT_PASSWORD='!123Senha' mongo
