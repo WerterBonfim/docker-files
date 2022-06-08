@@ -1,5 +1,38 @@
+# Filtros 
+
+| **Information** | **Variable** |
+|:---------------:|:------------:|
+| CONTAINER ID    | ID           |
+| IMAGE           | Image        |
+| COMMAND         | Command      |
+| CREATED         | RunningFor   |
+| STATUS          | Status       |
+| PORTS           | Ports        |
+| NAMES           | Names        |
+
+
 # Comandos Uteis
 ```bash
+# listar
+
+ docker container ls --format "table {{.ID}}\t{{.Image}}\t{{.Names}}"
+ docker container ls -a --format "table {{.ID}}\t{{.Image}}\t{{.Names}}"
+
+ alias nome_alias="docker container ls --format 'table {{.ID}}'"
+
+ docker container ls --format "table {{.ID}}\t{{.Image}}\t{{.Names}}\t{{.Status}}"
+
+ ## filtro 
+ # listar container por nome
+ docker container ls -a -f name=asdf
+
+
+ docker rm -v $(docker ps -a -q -f status=exited)
+
+
+
+
+
 # remover imagens não utilizadas/intermediarias
 docker rmi $(docker images -f dangling=true -q)
 
