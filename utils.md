@@ -51,6 +51,7 @@ docker rmi $(docker images -f dangling=true -q)
     -p 1433:1433 \
     -e 'TZ=America/Sao_Paulo' \
     -v sql-volume:/var/opt/mssql \
+    --memory="4G"
     mcr.microsoft.com/mssql/server
 
 
@@ -79,14 +80,20 @@ docker run --rm --name temp-alpine -it -p 1433:1433 mssql-alpine sqlcmd -S 'loca
 # Rabbitmq
 
 ```bash
-docker run --rm --name rabbit -d --hostname rabbit-host -p 15672:15672 -p 5672:5672 rabbitmq:management
+docker run --rm \
+    --name rabbit -d \
+    --hostname rabbit-host \
+    -p 15672:15672 \
+    -p 5672:5672 \
+    --memory="4G"
+    rabbitmq:management
 ```
 
 
 # MongoDB
 
 ```bash
-docker run --rm --name mongodb -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME='mongo' -e MONGO_INITDB_ROOT_PASSWORD='!123Senha' mongo
+docker run --rm --name mongodb -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME='mongo' -e MONGO_INITDB_ROOT_PASSWORD='!123Senha' --memory="4G" mongo
 
 ```
 
@@ -98,5 +105,7 @@ docker run --rm --name mongodb -d -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME='
         --name exceptionless \
         -p 5000:80 \
         -v exceptionless_data:/usr/share/elasticsearch/data \
+        --memory="4G" \
+        --cpus="1.5" \
         exceptionless/exceptionless:latest
 ```
